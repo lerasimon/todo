@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<title>Todo</title>
+		<link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
+		<style type="text/css">
+		input[type=submit]
+		{
+			max-width: 120px;
+		}
+		input[type=text]
+		{
+			max-width: 240px;
+		}
+		</style>
+		<script>
+		function remove(el)
+		{
+			var list = document.getElementById("list");
+			list.removeChild(el.parentNode);
+		}
+		function add(event)
+		{
+			event.preventDefault();
+
+			var item = document.getElementById("item");
+			var list = document.getElementById("list");
+
+			if(item.value == "")
+			{
+				alert("You must enter an item");
+				return;
+			}
+
+			var el = document.createElement("li");
+			el.innerHTML = item.value + ' <a href="#" onclick="remove(this);">[X]</a>';
+			list.appendChild(el);
+
+			item.value = "";
+		}
+		function add_on_enter(event)
+		{
+			if(event.keyCode == 13)
+				add();
+		}
+		</script>
+	</head>
+	<body>
+		<form>
+			<h1>TODO</h1>
+			<ul id="list"></ul>
+			<label for="item">New Item:</label>
+			<input id="item" type="text" onkeyup="add_on_enter(event);" />
+			<input type="submit" value="Add" onclick="add(event);"/>
+		</form>
+	</body>
+</html>
